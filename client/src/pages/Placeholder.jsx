@@ -1,0 +1,2 @@
+import {useLocation} from 'react-router-dom';
+export default function Placeholder(){const title=useLocation().pathname.slice(1).replace(/-/g,' ')||'Overview';return <section className="bg-white border border-borderwarm rounded-2xl p-10"><p className="text-sm text-orange font-semibold uppercase tracking-wider">Upcoming module</p><h1 className="text-3xl font-bold capitalize mt-2">{title}</h1><p className="text-gray-500 mt-3">This page is part of the development roadmap. No live data or functionality is available here yet.</p></section>}

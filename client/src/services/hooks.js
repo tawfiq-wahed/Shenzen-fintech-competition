@@ -1,0 +1,4 @@
+import {useEffect,useState} from 'react';import api,{messageFromError} from './api.js';
+export function useData(url,initial=[]){const [data,setData]=useState(initial),[error,setError]=useState(''),[loading,setLoading]=useState(true);const refresh=()=>{setLoading(true);return api.get(url).then(r=>{setData(r.data);setError('');}).catch(e=>setError(messageFromError(e))).finally(()=>setLoading(false));};useEffect(()=>{refresh();},[url]);return {data,error,loading,refresh};}
+export const money=n=>'¥'+Number(n||0).toLocaleString('en-yuan',{maximumFractionDigits:2});
+export const box='bg-white border border-borderwarm rounded-2xl p-5';export const input='border border-borderwarm rounded-lg p-3 w-full bg-white';export const button='bg-orange hover:opacity-90 text-white px-5 py-3 rounded-xl font-semibold disabled:opacity-50';

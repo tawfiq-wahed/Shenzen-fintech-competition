@@ -1,0 +1,3 @@
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+export async function requireAuth(req,res,next){try{const token=req.cookies?.easybiz_session;if(!token)return res.status(401).json({message:'Please sign in'});const payload=jwt.verify(token,process.env.JWT_SECRET,{algorithms:['HS256']});const user=await User.findById(payload.sub).select('_id name email sessionVersion');if(!user||Number(payload.ver||0)!==Number(user.sessionVersion||0))return res.status(401).json({message:'Session expired'});req.user=user;next();}catch{return res.status(401).json({message:'Invalid or expired session'});}}
